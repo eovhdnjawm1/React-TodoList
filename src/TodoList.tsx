@@ -41,18 +41,25 @@ interface IForm {
 	Username: string;
 	Password: string;
 	Passwordconfirm: string;
+	extraError?: string;
 }
 
 function TodoList() {
 	// register 함수를 사용하면 onchange 같은거 props같은거 쓸필요가 없음
 	//  watch 는 변화를 감지하는 함수
-	const { register, handleSubmit, formState: { errors } } = useForm<IForm>({
+	const { register, handleSubmit, formState: { errors }, setError } = useForm<IForm>({
 		defaultValues: {
 			email: "@naver.com",
 		}
 	});
-	const onValid = (data: any) => {
-		console.log(data)
+	const onValid = (data: IForm) => {
+		if (data.Password !== data.Passwordconfirm) {
+			setError("Passwordconfirm",
+				{ message: "비밀번호가 다릅니다." },
+				{ shouldFocus: true })
+		}
+		// setError("extraError", { message: "server offline" })
+
 	}
 	console.log(errors);
 	// formState.erros <- 에러핸들링을 찾아줌 값을 다 입력해도 minLength에 걸린다.
@@ -71,7 +78,16 @@ function TodoList() {
 				{/* input 의 required 속성을 사용했을때는 관리자 모드로 required를 지워버릴 수 있음
 				즉 html 이 아닌 js로 required적용 */}
 				<span>{errors?.email?.message}</span>
-				<input {...register("FirstName", { required: "적으슈" })} placeholder='First Name' />
+				<input {...register("FirstName", {
+					required: "적으슈",
+					// validate: (value) => value.includes("Young") ? "Young 은 안된다" : true,
+					validate: {
+						noYoung: async (value) => value.includes("Young") ? "Young 은 안된다" : true,
+						noJin: (value) => value.includes("Jin") ? "Jin도 안된다" : true,
+
+					}
+
+				})} placeholder='First Name' />
 				<span>{errors?.FirstName?.message}</span>
 
 				<input {...register("LastName", { required: "적으슈" })} placeholder='Last Name' />
@@ -83,11 +99,14 @@ function TodoList() {
 					}
 				})} placeholder='Username' />
 				<span>{errors?.Username?.message}</span>
+
 				<input type={'password'} {...register("Password", { required: "적으슈" })} placeholder='Password' />
 				<span>{errors?.Password?.message}</span>
+
 				<input {...register("Passwordconfirm", { required: "적으슈" })} placeholder='Password confirm' />
 				<span>{errors?.Passwordconfirm?.message}</span>
 				<button>Add</button>
+				<span>{errors?.extraError?.message}</span>
 			</form>
 		</div >
 	)
