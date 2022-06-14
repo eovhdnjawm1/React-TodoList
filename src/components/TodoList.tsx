@@ -10,12 +10,7 @@ function ToDoListAfter() {
 	// const [toDos, setToDos] = useRecoilState(toDostate);
 
 	const toDos = useRecoilValue(toDostate)
-
-
-
-	console.log(toDos);
-
-
+	// console.log(toDos);
 
 	return (
 
