@@ -62,6 +62,15 @@ function ToDo({ text, category, id }: IToDo) {
 		})
 	}
 
+	const deleteToDos = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setToDos(oldtoDos => {
+			const targetIndex = oldtoDos.findIndex((toDo) => toDo.id === id)
+			return [
+				...oldtoDos.slice(0, targetIndex),
+				...oldtoDos.slice(targetIndex + 1)];
+		})
+	}
+
 
 	return (
 		<>
@@ -86,6 +95,8 @@ function ToDo({ text, category, id }: IToDo) {
 
 				{category !== ECategory.완료 &&
 					<button name='완료' onClick={onClick}>완료</button>}
+				{category !== ECategory.제거 &&
+					<button name='제거' onClick={deleteToDos}>제거</button>}
 			</li>
 		</>
 	)
