@@ -1,5 +1,5 @@
 
-import { IToDo, toDostate } from './../atoms';
+import { ECategory, IToDo, toDostate } from './../atoms';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -78,14 +78,14 @@ function ToDo({ text, category, id }: IToDo) {
 					<button onClick={() => onClick("DONE")}>Done</button>} */}
 
 				{/* 2번 */}
-				{category !== "DOING" &&
-					<button name='DOING' onClick={onClick}>Doing</button>}
+				{category !== ECategory.해야할일 &&
+					<button name='해야할일' onClick={onClick}>해야할 일</button>}
 
-				{category !== "TO_DO" &&
-					<button name='TO_DO' onClick={onClick}>To Do</button>}
+				{category !== ECategory.하는중 &&
+					<button name='하는중' onClick={onClick}>하는중</button>}
 
-				{category !== "DONE" &&
-					<button name='DONE' onClick={onClick}>Done</button>}
+				{category !== ECategory.완료 &&
+					<button name='완료' onClick={onClick}>완료</button>}
 			</li>
 		</>
 	)
