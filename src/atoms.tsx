@@ -2,7 +2,6 @@ import { atom, selector } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
 export enum ECategory {
-	"전체보기" = "전체보기",
 	"해야할일" = "해야할일",
 	"하는중" = "하는중",
 	"완료" = "완료",
@@ -24,7 +23,7 @@ const { persistAtom } = recoilPersist({
 
 export const categoryState = atom<ECategory>({
 	key: "categoryState",
-	default: ECategory.전체보기,
+	default: ECategory.해야할일,
 });
 
 export const toDostate = atom<IToDo[]>({

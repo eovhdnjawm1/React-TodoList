@@ -19,14 +19,12 @@ function ToDoListAfter() {
 		setCategory(event.currentTarget.value as any);
 	}
 
-	const allTodos = useRecoilValue(toDostate);
 
 	return (
 
 		<>
 			<h1>To Dos</h1>
 			<select onInput={onInput} value={category}>
-				<option value={ECategory.전체보기}>전체 보기</option>
 				<option value={ECategory.해야할일}>해야할 것</option>
 				<option value={ECategory.하는중}>하는 중</option>
 				<option value={ECategory.완료}>완료</option>
@@ -40,13 +38,7 @@ function ToDoListAfter() {
 					<ToDo key={toDo.id} {...toDo} />
 				))}
 			</ul>
-			<hr />
-			<ul>
-				<h2> 모든 목록 </h2>
-				{allTodos?.map((toDo) => (
-					<ToDo key={toDo.id} {...toDo} />
-				))}
-			</ul>
+
 
 
 		</>
