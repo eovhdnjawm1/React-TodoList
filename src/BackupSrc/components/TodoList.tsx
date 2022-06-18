@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { categoryState, ECategory, toDostate } from '../atoms';
 import CreateToDo from './CreateToDo';
 import ToDo from './ToDo'
-import { toDoSelector } from './../atoms';
+import { toDoSelector } from '../atoms';
 
 function ToDoListAfter() {
 	// const value = useRecoilValue(toDostate);

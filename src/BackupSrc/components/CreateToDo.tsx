@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { categoryState, toDostate } from '../atoms';
-import { IToDo } from './../atoms';
+import { IToDo } from '../atoms';
 
 
 

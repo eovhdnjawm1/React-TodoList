@@ -1,5 +1,5 @@
 
-import { ECategory, IToDo, toDostate } from './../atoms';
+import { ECategory, IToDo, toDostate } from '../atoms';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 
