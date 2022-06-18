@@ -2,11 +2,26 @@
 import 'styled-components';
 
 // and extend them!
-declare module 'styled-components' {
+// declare module 'styled-components' {
+// 	export interface DefaultTheme {
+// 		textColor: string;
+// 		bgColor: string;
+// 		accentColor: string;
+// 		cardColor: string;
+// 	}
+// }
+
+declare module "styled-components" {
 	export interface DefaultTheme {
-		textColor: string;
-		bgColor: string;
-		accentColor: string;
-		cardColor: string;
+		red: string;
+		black: {
+			deepDark: string;
+			darker: string;
+			lighter: string;
+		};
+		white: {
+			darker: string;
+			lighter: string;
+		};
 	}
 }

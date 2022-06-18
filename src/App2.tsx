@@ -1,16 +1,5 @@
-import React from 'react';
-import ReactDOM from "react-dom/client";
-import App from './App';
-import { RecoilRoot } from 'recoil';
-import { ThemeProvider } from 'styled-components';
+import TodoList from './components/TodoList';
 import { createGlobalStyle } from 'styled-components';
-import { theme } from "./theme"
-
-
-const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Failed to find the root element');
-const root = ReactDOM.createRoot(rootElement);
-
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -70,50 +59,38 @@ table {
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  color: black;
-  line-height: 1.2;
-  font-weight: 300;
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
 }
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: ${props => props.theme.textColor};
+}
+
+.themeButton {
+	display: inline-block;
+	width: 90px;
+	height: 35px;
+  color: ${props => props.theme.textColor};
+	background-color: ${props => props.theme.bgColor};
+	border-radius: 30px;
+	position: relative;
+  border: 1px solid ${props => props.theme.accentColor};;
+  cursor: pointer;
+  margin: 15px; 
 }
 `
 
 
 
-root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
-    </RecoilRoot>
-  </React.StrictMode>
-);
+function App() {
+  return (
+    <>
+      <GlobalStyle />
+      <TodoList></TodoList>
+    </>
+  );
+}
 
-// 기존파일
-// import React from 'react';
-// import ReactDOM from "react-dom/client";
-// import App from './App';
-// import { RecoilRoot } from 'recoil';
-// import { darktheme } from './theme';
-// import { ThemeProvider } from 'styled-components';
-
-
-// const rootElement = document.getElementById('root');
-// if (!rootElement) throw new Error('Failed to find the root element');
-// const root = ReactDOM.createRoot(rootElement);
-
-
-// root.render(
-//   <React.StrictMode>
-//     <RecoilRoot>
-//       <ThemeProvider theme={darktheme}>
-//         <App />
-//       </ThemeProvider>
-//     </RecoilRoot>
-//   </React.StrictMode>
-// );
+export default App;
