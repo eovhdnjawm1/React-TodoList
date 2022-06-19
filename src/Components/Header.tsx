@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { motion, useAnimation, useViewportScroll } from "framer-motion"
 import { useRouteMatch } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
+import { useForm } from 'react-hook-form';
 
 const Nav = styled(motion.nav)`
   display: flex;
@@ -52,7 +52,7 @@ const Item = styled.li`
   }
 `
 
-const Search = styled.span`
+const Search = styled.form`
   color: white;
   display:flex;
   align-items: center;
@@ -109,6 +109,11 @@ const navVariants = {
 	}
 }
 
+interface IForm {
+	keyword: string;
+}
+
+
 function Header() {
 
 	const homeMatch = useRouteMatch("/");
@@ -144,6 +149,12 @@ function Header() {
 		})
 	}, [scrollY, navAnimation])
 
+	const { register, handleSubmit } = useForm<IForm>();
+	const history = useHistory();
+	const onVaild = (data: IForm) => {
+		history.push(`/search?keyword=${data.keyword}`)
+	}
+
 	return (
 		<Nav
 			variants={navVariants}
@@ -177,7 +188,7 @@ function Header() {
 			</Col>
 
 			<Col>
-				<Search >
+				<Search onSubmit={handleSubmit(onVaild)}>
 					<motion.svg
 						onClick={toggleSearch}
 						animate={{ x: searchOpen ? -190 : 0 }}
@@ -193,6 +204,7 @@ function Header() {
 						></path>
 					</motion.svg>
 					<Input
+						{...register("keyword", { required: true, minLength: 2 })}
 						animate={inputAnmation}
 						initial={{ scaleX: 0 }}
 						transition={{ type: "linear" }}

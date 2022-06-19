@@ -15,12 +15,13 @@ function App() {
 			<Switch>
 
 				<Route path="/tv">
-					<Search />
-				</Route>
-				<Route path="/search">
 					<Tv />
 				</Route>
-				<Route path="/">
+				<Route path="/search">
+					<Search />
+				</Route>
+
+				<Route path={["/", "/movies/:movieId"]}>
 					<Home />
 				</Route>
 			</Switch>
