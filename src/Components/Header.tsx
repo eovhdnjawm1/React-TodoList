@@ -57,6 +57,7 @@ const Search = styled.span`
   display:flex;
   align-items: center;
   position: relative;
+  cursor:pointer;
   svg {
     height: 25px;
   }
